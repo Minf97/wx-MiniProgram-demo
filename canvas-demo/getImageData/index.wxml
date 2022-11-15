@@ -1,0 +1,14 @@
+<view class="container">
+    <canvas type="2d" id="myCanvas" class="canvas1" bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd" >
+        <view class="dot" style="left: {{pos.x}}px; top: {{pos.y}}px;"></view>
+    
+    </canvas>
+
+    <view class="showBox">
+        <view class="colorBox" style="background-color: {{rgbColor}};"></view>
+        <view class="rgbText">rgb值：{{rgbColor}}</view>
+        <view class="hexText">hex值：</view>
+        <view class="hslText">hsl值：</view>
+    </view>
+
+</view>

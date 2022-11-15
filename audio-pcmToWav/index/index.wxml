@@ -1,0 +1,6 @@
+<!-- audio.wxml -->
+<audio  src="{{src}}" id="myAudio" ></audio>
+<button type="primary" bindtap="audioPlay">播放</button>
+<button type="primary" bindtap="audioPause">暂停</button>
+
+<!-- <image src="{{imageSrc}}" mode=""/> -->

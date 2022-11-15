@@ -1,0 +1,8 @@
+
+<input type="text" />
+ 
+<button bindtap="sendClick">发送内容</button>
+ 
+<view wx:for="{{result}}">
+{{item}}
+</view>
