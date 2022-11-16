@@ -1,3 +1,4 @@
+var audo = this;
 
 var addWavHeader = function (samples, sampleRateTmp, sampleBits, channelCount) {
     var dataLength = samples.byteLength;
@@ -63,6 +64,29 @@ var addWavHeader = function (samples, sampleRateTmp, sampleBits, channelCount) {
     return view.buffer;
 }
 
+var _visualize = function (audioContext, buffer) {
+    var audioBufferSouceNode = audioContext.createBufferSource(),
+        analyser = audioContext.createAnalyser(),
+        that = this;
+    //connect the source to the analyser
+    audioBufferSouceNode.connect(analyser);
+    //connect the analyser to the destination(the speaker), or we won't hear the sound
+    analyser.connect(audioContext.destination);
+    //then assign the buffer to the buffer source node
+    audioBufferSouceNode.buffer = buffer;
+    //play the source
+    if (!audioBufferSouceNode.start) {
+        audioBufferSouceNode.start = audioBufferSouceNode.noteOn //in old browsers use noteOn method
+        audioBufferSouceNode.stop = audioBufferSouceNode.noteOff //in old browsers use noteOff method
+    };
+    //stop the previous sound if any
+    if (this.animationId !== null) {
+        cancelAnimationFrame(this.animationId);
+    }
+    audioBufferSouceNode.start(0);
+    audo.source = audioBufferSouceNode;
+    audo.audioContext = audioContext;
+}
 export var pcm_wav = function (pcm, sampleRateTmp, sampleBits, channelCount) {
     //根据pcm文件 填写 sampleRateTmp【采样率】（11025） 和sampleBits【采样精度】（16） channelCount【声道】（单声道1，双声道2）
     var fileResult = addWavHeader(pcm, sampleRateTmp, sampleBits, channelCount);
